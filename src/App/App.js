@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 
-import GoogleMap from '../Map/GoogleMap';
+import GoogleMap from '../Map/GoogleMapComponent';
 import './App.css';
 
 class App extends Component {
 
   render() {
 
-    const mapCenter = { lng: -90.1056957, lat: 29.9717272 };
+    const centerLat = 29.9717272;
+    const centerLong = -90.1056957;
+    const initZoom = 10;
+    const markerData = {};
 
     return (
       <div className="App">
-        <GoogleMap initialCenter={mapCenter} />
+        <GoogleMap
+          centerLat={centerLat}
+          centerLong={centerLong}
+          initZoom={initZoom}
+          markerData={markerData}
+          />
       </div>
     );
   }
