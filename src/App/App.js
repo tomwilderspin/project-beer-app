@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { GOOGLE_MAPS_KEY } from '../Config/ClientKeys';
 
-import GoogleMap from '../Map/GoogleMapComponent';
+import GoogleMap from '../Map/GoogleMap/GoogleMapComponent';
 import './App.css';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
           centerLong={centerLong}
           initZoom={initZoom}
           markerData={markerData}
+          mapKey={GOOGLE_MAPS_KEY}
           />
       </div>
     );
