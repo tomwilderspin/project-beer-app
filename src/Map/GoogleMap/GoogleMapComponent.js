@@ -17,6 +17,10 @@ class GoogleMap extends Component {
   }
 
 	render() {
+    this.updateMapMarkers(this.props.markerData)
+      .map(marker => {
+        return marker.setMap(this.map);
+      });
     return <div className="GMap">
       <div className='GMap-canvas' ref="mapCanvas">
       </div>
@@ -26,7 +30,7 @@ class GoogleMap extends Component {
   componentDidMount() {
 
     //create new google map api
-    this.loadGoogleApi()
+    this.loadGoogleApi(this.props.mapKey)
       .then(googleApi => {
 
         //get map options
@@ -58,6 +62,26 @@ class GoogleMap extends Component {
     //this.googleApi.map.clearListeners(this.map, 'zoom_changed')
   }
 
+  updateMapMarkers(markerData) {
+
+    if (!markerData.hasOwnProperty('pins')) {
+      return [];
+    }
+
+    return markerData.pins.map(pin => {
+      return this.createMarker(
+        this.googleApi,
+        this.map,
+        this.createMapPosition(
+          this.googleApi,
+          pin.latitude,
+          pin.longitude
+        ),
+        pin.name
+      );
+    });
+  }
+
   loadGoogleApi(key) {
     return new Promise(resolve => {
       GoogleMapsLoader.KEY = key;
@@ -86,10 +110,11 @@ class GoogleMap extends Component {
     return new googleApi.maps.LatLng(lat, long)
   }
 
-  createMarker(googleApi, map, position) {
+  createMarker(googleApi, map, position, title) {
     return new googleApi.maps.Marker({
       position: position,
-      map: map
+      map: map,
+      title: title
     });
 	};
 

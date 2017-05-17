@@ -4,6 +4,11 @@ import IsoFetch from 'isomorphic-fetch';
 import { FETCH_MAP_PINS, RECEIVED_MAP_PINS } from '../Map/Actions';
 import { MAP_PINS_ENDPOINT } from '../Config/DataEndpoints';
 
+const testPinData = { pins:[
+  {latitude: 53.801198, longitude: -1.557102, title: 'location 1'},
+  {latitude: 53.799647, longitude: -1.556587, title: 'location 2'}
+]};
+
 
 export default store => next => action => {
 
@@ -13,7 +18,10 @@ export default store => next => action => {
       .then(response => {
         const pinData = response.json();
 
-        next({type: RECEIVED_MAP_PINS, pins: pinData});
+        return next({type: RECEIVED_MAP_PINS, pins: pinData});
+      })
+      .catch(e => {
+        return next({type: RECEIVED_MAP_PINS, pins: testPinData});
       });
 
   }

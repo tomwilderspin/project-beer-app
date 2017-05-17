@@ -28,6 +28,7 @@ class MapContainer extends Component {
   }
 
   render() {
+
     const mapCenter = this.props.centerPosition;
 
     const mapZoom = this.props.zoomLevel;
@@ -44,11 +45,13 @@ class MapContainer extends Component {
 
 //redux connect
 const mapStateToProps = state => {
+
   return {
     centerPosition: state.map.initLocation,
     zoomLevel: state.map.initZoom,
     mapKeyRequired: state.map.hasKey,
-    mapKey: state.map.key
+    mapKey: state.map.key,
+    mapPins: state.map.pins
   }
 }
 

@@ -8,11 +8,12 @@ import App from './App/App';
 import './index.css';
 
 const initialState = {
-    map: {
-      initLocation: { lat: 29.9717272, long: -90.1056957},
-      initZoom: 10,
+    map: { 
+      initLocation: { lat: 53.798179, long: -1.543627},
+      initZoom: 12,
       hasKey: true,
-      key: GOOGLE_MAPS_KEY
+      key: GOOGLE_MAPS_KEY,
+      pins: {}
     }
 }
 
