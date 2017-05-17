@@ -17,6 +17,7 @@ class MapContainer extends Component {
       }).isRequired,
       zoomLevel: PropTypes.number.isRequired,
       getMapPins: PropTypes.func.isRequired,
+      mapPins: PropTypes.object,
       mapKeyRequired: PropTypes.bool,
       mapKey: PropTypes.string
     }
@@ -34,7 +35,10 @@ class MapContainer extends Component {
     return <GoogleMapComponent
     centerLat={mapCenter.lat}
     centerLong={mapCenter.long}
-    initZoom={mapZoom} />
+    initZoom={mapZoom}
+    markerData={this.props.mapPins}
+    mapKey={this.props.mapKey}
+    />
   }
 }
 
