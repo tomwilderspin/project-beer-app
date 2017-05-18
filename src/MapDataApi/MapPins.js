@@ -16,9 +16,13 @@ export default store => next => action => {
 
     IsoFetch(MAP_PINS_ENDPOINT)
       .then(response => {
-        const pinData = response.json();
 
-        return next({type: RECEIVED_MAP_PINS, pins: pinData});
+        response.json()
+          .then(content => {
+
+            next({type: RECEIVED_MAP_PINS, pins: content.message});
+          });
+
       })
       .catch(e => {
         return next({type: RECEIVED_MAP_PINS, pins: testPinData});
