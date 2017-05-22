@@ -8,6 +8,7 @@ env:
 phases:
   pre_build:
     commands:
+      - export REACT_APP_GMAP_KEY=$(aws kms decrypt --ciphertext-blob fileb://config/gmaps --output text --query Plaintext | base64 --decode)
       - npm install
   build:
     commands:
