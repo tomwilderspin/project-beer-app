@@ -14,3 +14,6 @@ phases:
     commands:
       - npm run test
       - npm run build
+  post_build:
+    commands:
+      - aws s3 cp build/ s3://project-beer/ --recursive
