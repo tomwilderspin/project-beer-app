@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapsLoader from 'google-maps';
 import PropTypes from 'prop-types';
 import './GoogleMap.css';
-import mapStyles from './dark.mapStyle';
+import mapStyles from './silver.mapStyle';
 
 class GoogleMap extends Component {
 
