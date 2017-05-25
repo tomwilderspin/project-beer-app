@@ -11,7 +11,7 @@ class GoogleMap extends Component {
       centerLat:  PropTypes.number.isRequired,
       centerLong: PropTypes.number.isRequired,
       initZoom:   PropTypes.number.isRequired,
-      markerData: React.PropTypes.object.isRequired,
+      markerData: PropTypes.object.isRequired,
       mapKey:     PropTypes.string.isRequired
     };
   }
