@@ -6,11 +6,17 @@ import MapPins from '../MapDataApi/MapPins';
 
 
 export default function configureStore(initialState) {
+
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    || compose;
+    
   return createStore(
-      Reducer,
-      initialState,
-      compose(
-        applyMiddleware(thunk, MapPins)
-      )
+    Reducer,
+    initialState,
+    composeEnhancers(
+      applyMiddleware(thunk, MapPins)
+    )
   );
+
 }
