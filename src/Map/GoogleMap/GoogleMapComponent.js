@@ -19,7 +19,7 @@ class GoogleMap extends Component {
 	render() {
     this.updateMapMarkers(this.props.markerData)
       .map(marker => {
-        return marker.setMap(this.map);
+        return marker;
       });
     return <div className="GMap">
       <div className='GMap-canvas' ref="mapCanvas">
@@ -47,9 +47,9 @@ class GoogleMap extends Component {
         const map = this.createMap(googleApi, mapOptions, this.refs.mapCanvas);
 
         //style map with custom styles
-        const mapStyle = this.createMapStyle(googleApi, mapStyles, 'night');
-        map.mapTypes.set('night', mapStyle);
-        map.setMapTypeId('night');
+        const mapStyle = this.createMapStyle(googleApi, mapStyles, 'custom');
+        map.mapTypes.set('custom', mapStyle);
+        map.setMapTypeId('custom');
 
         //map.addListener('zoom_changed', this.handleZoomChange(map));
         this.map = map;
@@ -69,7 +69,7 @@ class GoogleMap extends Component {
     }
 
     return markerData.pins.map(pin => {
-      return this.createMarker(
+      return this.createCustomMarker(
         this.googleApi,
         this.map,
         this.createMapPosition(
@@ -117,6 +117,71 @@ class GoogleMap extends Component {
       title: title
     });
 	};
+
+  createCustomMarker(googleApi, map, position, title) {
+
+    let self;
+
+    function overlayView (position, map, args) {
+      this.position = position;
+      this.args = args;
+      this.setMap(map);
+      self = this;
+    };
+
+    overlayView.prototype = new googleApi.maps.OverlayView();
+
+    overlayView.prototype.draw = () => {
+      let contentContainer = self.contentContainer;
+
+      if (!contentContainer) {
+
+        contentContainer = self.contentContainer = document.createElement('div');
+
+        //poc content - replace with styled marker css
+        contentContainer.className = 'marker';
+        contentContainer.style.position = 'absolute';
+        contentContainer.style.cursor = 'pointer';
+        contentContainer.style.width = '20px';
+        contentContainer.style.height = '20px';
+        contentContainer.style.background = 'blue';
+        ///
+
+        //check if marker id is set
+        /*if (typeof(self.args.marker_id) !== 'undefined') {
+            contentContainer.dataset.marker_id = self.args.marker_id;
+        }*/
+
+        //add marker click listener
+        googleApi.maps.event.addDomListener(contentContainer, 'click', (event) => {
+          googleApi.maps.event.trigger(self, 'click');
+        });
+
+        //add to map panes
+        const panes = self.getPanes();
+        panes.overlayLayer.appendChild(contentContainer);
+      }
+
+      //set marker position on map titles
+      const point = self.getProjection().fromLatLngToDivPixel(position);
+
+      if (point) {
+        contentContainer.style.left = point.x + 'px';
+        contentContainer.style.top  = point.y + 'px';
+      }
+    };
+
+    overlayView.prototype.onRemove = () => {
+      self.contentContainer.parentNode.removeChild(this.contentContainer);
+      self.contentContainer = null;
+    };
+
+    overlayView.prototype.getPosition = () => {
+      return self.latlng;
+    };
+
+    return new overlayView(position, map);
+  }
 
   createInfoWindow(googleApi, map, marker) {
     const contentString = "<div class='InfoWindow'>I'm a Window that contains Info Yay</div>"
