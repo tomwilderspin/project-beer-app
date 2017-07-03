@@ -3,6 +3,10 @@ import GoogleMapsLoader from 'google-maps';
 import PropTypes from 'prop-types';
 import './GoogleMap.css';
 import mapStyles from './silver.mapStyle';
+import defaultMarkerImage from '../default-marker-icon.png';
+
+import { GMAP_API_KEY } from '../../Config/Environment';
+
 
 class GoogleMap extends Component {
 
@@ -11,8 +15,7 @@ class GoogleMap extends Component {
       centerLat:  PropTypes.number.isRequired,
       centerLong: PropTypes.number.isRequired,
       initZoom:   PropTypes.number.isRequired,
-      markerData: PropTypes.object.isRequired,
-      mapKey:     PropTypes.string.isRequired
+      markerData: PropTypes.object.isRequired
     };
   }
 
@@ -30,7 +33,7 @@ class GoogleMap extends Component {
   componentDidMount() {
 
     //create new google map api
-    this.loadGoogleApi(this.props.mapKey)
+    this.loadGoogleApi(GMAP_API_KEY)
       .then(googleApi => {
 
         //get map options
@@ -68,7 +71,16 @@ class GoogleMap extends Component {
       return [];
     }
 
+    const pinDefaults = {
+      imageSrc: defaultMarkerImage,
+
+    };
+
+
     return markerData.pins.map(pin => {
+
+      const params = {...pinDefaults, markerId: pin.title };
+
       return this.createCustomMarker(
         this.googleApi,
         this.map,
@@ -77,9 +89,25 @@ class GoogleMap extends Component {
           pin.latitude,
           pin.longitude
         ),
-        pin.name
+        {
+          markerId: pin.title,
+          markerElement: this.createCustomerMarkerContent(params)
+        }
       );
     });
+  }
+
+  createCustomerMarkerContent(pinData) {
+    const image = document.createElement('img');
+    image.src =  pinData.imageSrc;
+    image.alt = pinData.markerId;
+    image.style.width = '32px';
+    image.style.height = '32px';
+
+    const outer = document.createElement('div');
+    outer.appendChild(image);
+
+    return outer;
   }
 
   loadGoogleApi(key) {
@@ -118,7 +146,7 @@ class GoogleMap extends Component {
     });
 	};
 
-  createCustomMarker(googleApi, map, position, title) {
+  createCustomMarker(googleApi, map, position, args) {
 
     let self;
 
@@ -139,22 +167,22 @@ class GoogleMap extends Component {
         contentContainer = self.contentContainer = document.createElement('div');
 
         //poc content - replace with styled marker css
-        contentContainer.className = 'marker';
+        contentContainer.className = 'map-marker-container';
         contentContainer.style.position = 'absolute';
-        contentContainer.style.cursor = 'pointer';
-        contentContainer.style.width = '20px';
-        contentContainer.style.height = '20px';
-        contentContainer.style.background = 'blue';
+        contentContainer.style.width = '32px';
+        contentContainer.style.height = '32px';
+        contentContainer.appendChild(self.args.markerElement);
         ///
 
         //check if marker id is set
-        /*if (typeof(self.args.marker_id) !== 'undefined') {
+        if (self.args.hasOwnProperty('marker_id')) {
             contentContainer.dataset.marker_id = self.args.marker_id;
-        }*/
+        }
 
         //add marker click listener
         googleApi.maps.event.addDomListener(contentContainer, 'click', (event) => {
-          googleApi.maps.event.trigger(self, 'click');
+          
+          //googleApi.maps.event.trigger(self.args, 'click');
         });
 
         //add to map panes
@@ -180,7 +208,7 @@ class GoogleMap extends Component {
       return self.latlng;
     };
 
-    return new overlayView(position, map);
+    return new overlayView(position, map, args);
   }
 
   createInfoWindow(googleApi, map, marker) {

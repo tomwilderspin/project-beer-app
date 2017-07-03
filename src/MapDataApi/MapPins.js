@@ -2,7 +2,7 @@
 import IsoFetch from 'isomorphic-fetch';
 
 import { FETCH_MAP_PINS, RECEIVED_MAP_PINS } from '../Map/Actions';
-import { MAP_PINS_ENDPOINT } from '../Config/DataEndpoints';
+import { MAP_PINS_ENDPOINT } from '../Config/Environment';
 
 const testPinData = { pins:[
   {latitude: 53.801198, longitude: -1.557102, title: 'location 1'},
