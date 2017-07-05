@@ -107,6 +107,11 @@ class GoogleMap extends Component {
     const outer = document.createElement('div');
     outer.appendChild(image);
 
+    //add click listener to marker content
+    outer.addEventListener('click', event => {
+      console.log('clicked: ', pinData.markerId);
+    });
+
     return outer;
   }
 
@@ -181,13 +186,13 @@ class GoogleMap extends Component {
 
         //add marker click listener
         googleApi.maps.event.addDomListener(contentContainer, 'click', (event) => {
-          
-          //googleApi.maps.event.trigger(self.args, 'click');
+
+          googleApi.maps.event.trigger(self.args, 'click');
         });
 
         //add to map panes
         const panes = self.getPanes();
-        panes.overlayLayer.appendChild(contentContainer);
+        panes.overlayMouseTarget.appendChild(contentContainer);
       }
 
       //set marker position on map titles
@@ -209,15 +214,6 @@ class GoogleMap extends Component {
     };
 
     return new overlayView(position, map, args);
-  }
-
-  createInfoWindow(googleApi, map, marker) {
-    const contentString = "<div class='InfoWindow'>I'm a Window that contains Info Yay</div>"
-    return new googleApi.maps.InfoWindow({
-      map,
-      anchor: marker,
-      content: contentString
-    })
   }
 
   handleZoomChange(map) {
