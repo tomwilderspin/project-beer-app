@@ -176,6 +176,7 @@ class GoogleMap extends Component {
         contentContainer.style.position = 'absolute';
         contentContainer.style.width = '32px';
         contentContainer.style.height = '32px';
+        contentContainer.style.display = 'block';
         contentContainer.appendChild(self.args.markerElement);
         ///
 
@@ -186,7 +187,6 @@ class GoogleMap extends Component {
 
         //add marker click listener
         googleApi.maps.event.addDomListener(contentContainer, 'click', (event) => {
-
           googleApi.maps.event.trigger(self.args, 'click');
         });
 
@@ -211,6 +211,14 @@ class GoogleMap extends Component {
 
     overlayView.prototype.getPosition = () => {
       return self.latlng;
+    };
+
+    overlayView.prototype.setVisible = (visible) => {
+      if (self.contentContainer.style.display === 'none') {
+        self.contentContainer.style.display = 'block';
+      } else {
+        self.contentContainer.style.display = 'none';
+      }
     };
 
     return new overlayView(position, map, args);
