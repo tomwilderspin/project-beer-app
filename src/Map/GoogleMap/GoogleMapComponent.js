@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './GoogleMap.css';
 import mapStyles from './silver.mapStyle';
 import defaultMarkerImage from '../default-marker-icon.png';
-
+import MarkerClusterer from './MarkerClusterer';
 import { GMAP_API_KEY } from '../../Config/Environment';
 
 
@@ -20,10 +20,8 @@ class GoogleMap extends Component {
   }
 
 	render() {
-    this.updateMapMarkers(this.props.markerData)
-      .map(marker => {
-        return marker;
-      });
+    this.updateMapMarkers(this.props.markerData);
+
     return <div className="GMap">
       <div className='GMap-canvas' ref="mapCanvas">
       </div>
@@ -76,8 +74,7 @@ class GoogleMap extends Component {
 
     };
 
-
-    return markerData.pins.map(pin => {
+    const markers = markerData.pins.map(pin => {
 
       const params = {...pinDefaults, markerId: pin.title };
 
@@ -95,6 +92,11 @@ class GoogleMap extends Component {
         }
       );
     });
+
+    //add marker clustering
+    new MarkerClusterer(this.map, markers, {
+        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+      });
   }
 
   createCustomerMarkerContent(pinData) {
@@ -205,12 +207,12 @@ class GoogleMap extends Component {
     };
 
     overlayView.prototype.onRemove = () => {
-      self.contentContainer.parentNode.removeChild(this.contentContainer);
+      self.contentContainer.parentNode.removeChild(self.contentContainer);
       self.contentContainer = null;
     };
 
     overlayView.prototype.getPosition = () => {
-      return self.latlng;
+      return self.position;
     };
 
     overlayView.prototype.setVisible = (visible) => {
