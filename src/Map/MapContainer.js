@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchMapPins } from './Actions';
+import { fetchMapPins, mapPinClick } from './Actions';
 
 import GoogleMapComponent from './GoogleMap/GoogleMapComponent';
 
@@ -17,6 +17,7 @@ class MapContainer extends Component {
       }).isRequired,
       zoomLevel: PropTypes.number.isRequired,
       getMapPins: PropTypes.func.isRequired,
+      mapPinClick: PropTypes.func.isRequired,
       mapPins: PropTypes.object,
       mapKeyRequired: PropTypes.bool,
       mapKey: PropTypes.string
@@ -33,11 +34,17 @@ class MapContainer extends Component {
 
     const mapZoom = this.props.zoomLevel;
 
+    const pinData = Object.assign(
+      {},
+      this.props.mapPins,
+      { clickAction: this.props.mapPinClick }
+    );
+
     return <GoogleMapComponent
     centerLat={mapCenter.lat}
     centerLong={mapCenter.long}
     initZoom={mapZoom}
-    markerData={this.props.mapPins}
+    markerData={pinData}
     mapKey={this.props.mapKey}
     />
   }
@@ -58,9 +65,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getMapPins: () => {
-      return dispatch(fetchMapPins())
+      return dispatch(fetchMapPins());
     },
-
+    mapPinClick: (pinId) => {
+      return dispatch(mapPinClick(pinId));
+    }
   }
 }
 

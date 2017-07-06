@@ -109,7 +109,7 @@ class GoogleMap extends Component {
 
     //add click listener to marker content
     outer.addEventListener('click', event => {
-      console.log('clicked: ', pinData.markerId);
+      this.props.markerData.clickAction(pinData.markerId);
     });
 
     return outer;
