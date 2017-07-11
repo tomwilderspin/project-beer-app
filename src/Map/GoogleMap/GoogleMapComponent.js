@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './GoogleMap.css';
 import mapStyles from './silver.mapStyle';
 import defaultMarkerImage from '../default-marker-icon.png';
+import defaultClusterImage from '../default-cluster-icon.png';
 import MarkerClusterer from './MarkerClusterer';
 import { GMAP_API_KEY } from '../../Config/Environment';
 
@@ -95,7 +96,15 @@ class GoogleMap extends Component {
 
     //add marker clustering
     new MarkerClusterer(this.map, markers, {
-        imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+        minimumClusterSize: 6,
+        styles: [{
+          url: defaultClusterImage,
+          width: 32,
+          height: 32,
+          textColor: '#fff',
+          textSize: 13,
+          anchor: [16, 13],
+        }]
       });
   }
 
@@ -211,7 +220,7 @@ class GoogleMap extends Component {
       self.contentContainer = null;
     };
 
-    overlayView.prototype.getPosition = () => {
+     overlayView.prototype.getPosition = () => {
       return self.position;
     };
 
