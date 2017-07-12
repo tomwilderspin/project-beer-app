@@ -114,6 +114,7 @@ class GoogleMap extends Component {
     image.alt = pinData.markerId;
     image.style.width = '32px';
     image.style.height = '32px';
+    image.style.cursor = 'pointer';
 
     const outer = document.createElement('div');
     outer.appendChild(image);
