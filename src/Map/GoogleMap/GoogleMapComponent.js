@@ -145,7 +145,12 @@ class GoogleMap extends Component {
 
     const mapConfig = {
       zoom: mapOptions.zoom,
-      center: mapOptions.centerPosition
+      center: mapOptions.centerPosition,
+      disableDefaultUI: true,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: googleApi.maps.ControlPosition.LEFT_TOP
+      }
     };
 
     return new googleApi.maps.Map(canvas, mapConfig);

@@ -1,3 +1,16 @@
 .navbar {
   margin-bottom: 0;
+  border-radius: 0;
 }
+
+.nabar-inverse {
+  color: #fff;
+}
+
+.navbar a {
+    text-transform: uppercase;
+  }
+
+.navbar img {
+    padding: 8px;
+  }
