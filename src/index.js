@@ -15,6 +15,10 @@ const initialState = {
       hasKey: true,
       key: process.env.REACT_APP_GMAP_KEY,
       pins: {}
+    },
+    content: {
+      show: false,
+      information: {}
     }
 }
 
