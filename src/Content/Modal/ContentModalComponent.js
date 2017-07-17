@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-class MarkerModal extends Component {
+class ContentModal extends Component {
   static propTypes() {
   	return {
       showModal: PropTypes.bool.isRequired,
@@ -26,4 +26,4 @@ class MarkerModal extends Component {
 
 }
 
-export default MarkerModal;
+export default ContentModal;

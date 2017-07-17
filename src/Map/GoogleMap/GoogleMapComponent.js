@@ -149,7 +149,7 @@ class GoogleMap extends Component {
       disableDefaultUI: true,
       zoomControl: true,
       zoomControlOptions: {
-        position: googleApi.maps.ControlPosition.LEFT_TOP
+        position: googleApi.maps.ControlPosition.RIGHT_BOTTOM
       }
     };
 

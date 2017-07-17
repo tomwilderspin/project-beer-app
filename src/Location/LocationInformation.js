@@ -11,6 +11,8 @@ export default store => next => action => {
     return next(openContent(action.id));
   }
 
+  //todo extend to include content checks and dispatch content fetch action.
+
   return next(action);
 
 }

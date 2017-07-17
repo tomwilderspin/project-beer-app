@@ -40,13 +40,17 @@ class MapContainer extends Component {
       { clickAction: this.props.mapPinClick }
     );
 
-    return <GoogleMapComponent
-    centerLat={mapCenter.lat}
-    centerLong={mapCenter.long}
-    initZoom={mapZoom}
-    markerData={pinData}
-    mapKey={this.props.mapKey}
-    />
+    return (
+      <article className="map-article">
+        <GoogleMapComponent
+          centerLat={mapCenter.lat}
+          centerLong={mapCenter.long}
+          initZoom={mapZoom}
+          markerData={pinData}
+          mapKey={this.props.mapKey}
+        />
+      </article>
+    );
   }
 }
 

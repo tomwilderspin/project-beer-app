@@ -17,11 +17,13 @@ class ContentContainer extends Component {
 
   render() {
     return (
+      <div className="modal">
       <LocationModal
         showModal={this.props.showContent}
         locationInformation={this.props.locationInformation}
         closeAction={this.props.closeContentAction}
       />
+      </div>
     );
   }
 }

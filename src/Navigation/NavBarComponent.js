@@ -8,24 +8,26 @@ class NavBar extends Component {
 
   render() {
     return (
-      <Navbar inverse collapseOnSelect>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <img src={BrandLogo} alt="beer map" />
-      </Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar.Header>
-    <Navbar.Collapse>
-      <Nav>
-        <NavItem eventKey={1} href="#">About</NavItem>
-        <NavItem eventKey={2} href="#">Register</NavItem>
-      </Nav>
-      <Nav pullRight>
-        <NavItem eventKey={1} href="#">Link Right</NavItem>
-        <NavItem eventKey={2} href="#">Link Right</NavItem>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
+      <header className="nav-header">
+        <Navbar inverse collapseOnSelect fixedTop>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <img src={BrandLogo} alt="beer map" />
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav>
+          <NavItem eventKey={1} href="#">About</NavItem>
+          <NavItem eventKey={2} href="#">Register</NavItem>
+        </Nav>
+        <Nav pullRight>
+          <NavItem eventKey={1} href="#">Link Right</NavItem>
+          <NavItem eventKey={2} href="#">Link Right</NavItem>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  </header>
     )
   }
 }
