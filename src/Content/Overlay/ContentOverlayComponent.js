@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import CloseButton from '../../Navigation/CloseButton';
+//todo add in context for article...
 
 class ContentModal extends Component {
   static propTypes() {
@@ -13,13 +14,11 @@ class ContentModal extends Component {
 
   render() {
     return (
-      <Modal show={this.props.showModal} onHide={this.props.closeAction} >
-      <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-      </Modal.Header>
-      <Modal.Body> <h4>something header</h4> </Modal.Body>
-      <Modal.Footer> <p> some footer text</p> </Modal.Footer>
-      </Modal>
+      <section className="content-overlay">
+      <CloseButton />
+      <article className="content-overlay__article">
+      </article>
+      </section>
     );
   }
 

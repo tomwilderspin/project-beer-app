@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import LocationModal from './LocationModal/LocationModalComponent';
+import LocationModal from './Modal/ContentModalComponent';
 import { closeContent } from './Actions';
 
 class ContentContainer extends Component {
