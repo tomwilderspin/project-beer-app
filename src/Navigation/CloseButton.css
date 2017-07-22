@@ -1,0 +1,6 @@
+.nav__close-button {
+  padding: 3px;
+}
+.nav__close-button:active, .nav__close-button:focus {
+  outline: none;
+}

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import "./ContentSection.css";
-
 
 class ContentSection extends Component {
 
@@ -14,7 +12,7 @@ class ContentSection extends Component {
 
   render() {
     return (
-      <section className="content-section">
+      <section>
         <strong>Holy guacamole!</strong> Check this info.
       </section>
     );

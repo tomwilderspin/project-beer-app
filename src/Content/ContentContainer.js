@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import ContentOverlay from './Overlay/ContentOverlayComponent';
+import  ContentOverlay from './Overlay/ContentOverlayComponent';
 import { closeContent } from './Actions';
 
 class ContentContainer extends Component {
@@ -19,7 +19,7 @@ class ContentContainer extends Component {
     return (
       <div>
       <ContentOverlay
-        showModal={this.props.showContent}
+        show={this.props.showContent}
         locationInformation={this.props.locationInformation}
         closeAction={this.props.closeContentAction}
         container={this}

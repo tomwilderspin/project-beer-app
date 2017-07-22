@@ -1,4 +1,4 @@
-.content-section {
+.content-overlay {
   position: absolute;
   background: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -11,7 +11,7 @@
 }
 
 @media (min-width: 576px) {
-  .content-section {
+  .content-overlay {
     top: 100px;
     right: 50px;
     width: 33.333%;
