@@ -1,0 +1,19 @@
+.content-section {
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  top: 50px;
+  width: 100%;
+  height:100%;
+  z-index: 5;
+  color: #000;
+}
+
+@media (min-width: 576px) {
+  .content-section {
+    top: 100px;
+    right: 50px;
+    width: 33.333%;
+  }
+}

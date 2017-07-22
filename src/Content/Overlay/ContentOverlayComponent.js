@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CloseButton from '../../Navigation/CloseButton';
-//todo add in context for article...
 
-class ContentModal extends Component {
+import { Overlay } from 'react-bootstrap';
+import ContentSection from '../ContentSectionComponent';
+
+class ContentOverlay extends Component {
   static propTypes() {
   	return {
       showModal: PropTypes.bool.isRequired,
       closeAction: PropTypes.func.isRequired,
-      locationInformation: PropTypes.object
+      locationInformation: PropTypes.object,
+      container: PropTypes.object
     };
   }
 
   render() {
+
+    const {container} = this.props || this;
+
     return (
-      <section className="content-overlay">
-      <CloseButton />
-      <article className="content-overlay__article">
-      </article>
-      </section>
+      <Overlay
+        show={this.props.showModal}
+        onHide={this.props.closeAction}
+        placement="top"
+        container={container}
+      >
+      <ContentSection />
+      </Overlay>
     );
   }
 
 
 }
 
-export default ContentModal;
+export default ContentOverlay;

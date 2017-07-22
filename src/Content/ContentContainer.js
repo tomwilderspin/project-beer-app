@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import LocationModal from './Modal/ContentModalComponent';
+import ContentOverlay from './Overlay/ContentOverlayComponent';
 import { closeContent } from './Actions';
 
 class ContentContainer extends Component {
@@ -17,11 +17,12 @@ class ContentContainer extends Component {
 
   render() {
     return (
-      <div className="modal">
-      <LocationModal
+      <div>
+      <ContentOverlay
         showModal={this.props.showContent}
         locationInformation={this.props.locationInformation}
         closeAction={this.props.closeContentAction}
+        container={this}
       />
       </div>
     );
