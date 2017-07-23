@@ -14,7 +14,7 @@ class CloseButton extends Component {
 
   render() {
     return (
-        <a className="btn btn-default nav__close-button" href="#" role="button" onClick={this.props.onClick}>
+        <a className="nav__close-button" href="#" role="button" onClick={this.props.onClick}>
           <span className="glyphicon glyphicon-remove"></span>
         </a>
     )

@@ -148,6 +148,7 @@ class GoogleMap extends Component {
       center: mapOptions.centerPosition,
       disableDefaultUI: true,
       zoomControl: true,
+      clickableIcons: false,
       zoomControlOptions: {
         position: googleApi.maps.ControlPosition.RIGHT_BOTTOM
       }

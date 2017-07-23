@@ -1,6 +1,11 @@
 .nav__close-button {
-  padding: 3px;
+  padding: 5px;
+  border: 0;
+  float:right;
+  color: #000;
 }
-.nav__close-button:active, .nav__close-button:focus {
+
+.nav__close-button:active, .nav__close-button:focus, .nav__close-button:hover, .nav__close-button:active:focus {
   outline: none;
+  color: #000;
 }
