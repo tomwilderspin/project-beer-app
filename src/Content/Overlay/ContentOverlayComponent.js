@@ -44,7 +44,7 @@ class OverlayInner extends Component {
         <div className="row row-no-margin">
           <CloseButton onClick={this.props.closeAction} />
         </div>
-        <div className="row row-no-margin">
+        <div className="row row-no-margin text-left content-overlay__article">
           <ContentSection />
         </div>
       </div>

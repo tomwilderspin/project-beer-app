@@ -17,4 +17,10 @@
     width: 33.333%;
     height: calc(100% - 70px);
   }
+
+  .content-overlay__article {
+    overflow-x: hidden;
+    overflow: scroll;
+    height: calc(100% - 30px);
+  }
 }
