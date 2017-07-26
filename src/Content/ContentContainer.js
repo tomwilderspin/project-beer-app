@@ -20,7 +20,7 @@ class ContentContainer extends Component {
       <div>
       <ContentOverlay
         show={this.props.showContent}
-        locationInformation={this.props.locationInformation}
+        contentData={this.props.contentData}
         closeAction={this.props.closeContentAction}
         container={this}
       />
@@ -32,7 +32,7 @@ class ContentContainer extends Component {
 //redux connect
 const mapStateToProps = state => {
   return {
-    locationInformation: state.content.information,
+    contentData: state.content.data,
     showContent: state.content.show
   }
 }

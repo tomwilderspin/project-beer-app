@@ -18,7 +18,7 @@ const initialState = {
     },
     content: {
       show: false,
-      information: {}
+      data: {}
     }
 }
 

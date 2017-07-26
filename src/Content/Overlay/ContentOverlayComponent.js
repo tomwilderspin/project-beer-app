@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Overlay } from 'react-bootstrap';
-import ContentSection from '../ContentSectionComponent';
+import ContentSection from '../Section/ContentSectionComponent';
 import CloseButton from '../../Navigation/CloseButtonComponent';
 
 import './ContentOverlay.css';
@@ -10,27 +10,27 @@ import './ContentOverlay.css';
 
 class ContentOverlay extends Component {
 
-  static propTypes() {
-  	return {
-      show: PropTypes.bool.isRequired,
-      closeAction: PropTypes.func.isRequired,
-      locationInformation: PropTypes.object,
-      container: PropTypes.object
-    };
-  }
+  static propTypes = {
+    show: PropTypes.bool.isRequired,
+    closeAction: PropTypes.func.isRequired,
+    contentData: PropTypes.object.isRequired,
+    container: PropTypes.object
+  };
+
+  static defaultProps = {
+    show: false,
+    container: this
+  };
 
   render() {
-
-    const { container } = this.props || this;
-
     return (
       <Overlay
         show={this.props.show}
         onHide={this.props.closeAction}
         placement="top"
-        container={container}
+        container={this.props.container}
       >
-        <OverlayInner closeAction={this.props.closeAction} />
+        <OverlayInner data={this.props.contentData} closeAction={this.props.closeAction} />
       </Overlay>
     );
   }
@@ -45,7 +45,7 @@ class OverlayInner extends Component {
           <CloseButton onClick={this.props.closeAction} />
         </div>
         <div className="row row-no-margin text-left content-overlay__article">
-          <ContentSection />
+          <ContentSection data={this.props.data} />
         </div>
       </div>
     );
