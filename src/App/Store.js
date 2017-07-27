@@ -2,7 +2,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import Reducer from './Reducer';
-import MapPins from '../MapDataApi/MapPins';
+import MapPins from '../Data/MapApi/MapPins';
 import LocationInformation from '../Location/LocationInformation';
 
 

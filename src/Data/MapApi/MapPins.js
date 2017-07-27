@@ -1,8 +1,8 @@
 
 import IsoFetch from 'isomorphic-fetch';
 
-import { FETCH_MAP_PINS, RECEIVED_MAP_PINS } from '../Map/Actions';
-import { MAP_PINS_ENDPOINT } from '../Config/Environment';
+import { FETCH_MAP_PINS, RECEIVED_MAP_PINS } from '../../Map/Actions';
+import { MAP_PINS_ENDPOINT } from '../../Config/Environment';
 
 
 export default store => next => action => {
