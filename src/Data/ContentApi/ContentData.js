@@ -8,6 +8,8 @@ import {
 
 export default store => next => action => {
 
-  //todo content data fetch ..
+    if(action.type === FETCH_CONTENT_DATA) {
+      //todo get data from remote store 
+    }
 
 }
